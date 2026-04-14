@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palmarès & Réussite — Lycée Privé Madina</title>
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts — Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Spécificités Palmarès */
+    #palmares-hero {
+      background-position: center 30%;
+    }
+    
+    .timeline-container {
+      position: relative;
+      padding: 4rem 0;
+    }
+    
+    /* La ligne centrale de la timeline (Desktop) */
+    .timeline-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: linear-gradient(to bottom, rgba(0, 139, 139, 0) 0%, rgba(0, 139, 139, 0.5) 10%, rgba(0, 139, 139, 0.5) 90%, rgba(0, 139, 139, 0) 100%);
+      transform: translateX(-50%);
+      z-index: 0;
+      transform-origin: top;
+      transform: scaleY(0); /* Pour l'animation GSAP */
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      z-index: 1;
+      opacity: 0; /* Géré par GSAP */
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid var(--primary-brand);
+      box-shadow: 0 0 0 6px rgba(0, 139, 139, 0.2);
+    }
+    
+    .timeline-card {
+      background: var(--surface-glass-strong);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(0, 139, 139, 0.15);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: default;
+    }
+    
+    .timeline-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 139, 139, 0.2);
+    }
+    
+    .timeline-image-container {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .timeline-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    
+    .timeline-card:hover .timeline-image {
+      transform: scale(1.1);
+    }
+    
+    .achievement-year {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-brand);
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .achievement-rate {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 0 rgba(0, 139, 139, 0.1);
+      display: flex;
+      align-items: baseline;
+    }
+    
+    .achievement-rate span {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+    
+    .expertise-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e2e8e8 100%);
+      padding: 6rem 0;
+      position: relative;
+    }
+    
+    .expertise-phrase {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.4;
+      color: var(--primary-dark);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .quote-mark {
+      position: absolute;
+      font-size: 10rem;
+      color: rgba(0, 139, 139, 0.05);
+      top: -40px;
+      left: 10%;
+      z-index: 0;
+      font-family: serif;
+      line-height: 1;
+    }
+    
+    @media (max-width: 991px) {
+      .timeline-line {
+        left: 30px;
+      }
+      .timeline-dot {
+        left: 30px;
+      }
+      .timeline-item .col-md-6 {
+        width: calc(100% - 60px);
+        margin-left: auto;
+      }
+      .text-md-end {
+        text-align: left !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-spinner"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-madina sticky-top" id="mainNav" role="navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html#accueil">
+        <img src="Images/logo/logo-removebg-4" alt="Logo Lycée Madina" class="navbar-brand-logo" width="55" height="55">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#accueil">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#apropos">À Propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#lycee">Lycée</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="installations.html">Installations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Palmarès</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section section-wrapper" id="palmares-hero">
+    <img src="Images/Concourslivre/1-removebg-preview.png" alt="Remise de Diplômes" class="hero-bg" width="1920" height="1080">
+    <div class="hero-overlay" style="background: linear-gradient(135deg, rgba(10, 61, 61, 0.85) 0%, rgba(20, 20, 20, 0.8) 100%);"></div>
+    <div class="hero-content text-center">
+      <h1 class="fade-in-up fw-bold" style="font-size: 4rem; letter-spacing: -2px;">Notre Palmarès</h1>
+      <p class="fade-in-up" style="transition-delay: 0.15s; max-width: 800px; margin: 0 auto 2rem auto; font-size: 1.25rem;">
+        Des années d'excellence académique certifiée. L'histoire du Lycée Madina s'écrit à travers le succès éclatant de ses élèves aux examens nationaux.
+      </p>
+    </div>
+  </section>
+
+  <!-- TIMELINE RÉUSSITE BACCALAURÉAT -->
+  <section class="section-wrapper" style="padding: 6rem 0; background-color: #ffffff; overflow: hidden;">
+    <div class="container">
+      <div class="text-center fade-in-up mb-5">
+        <h2 class="section-title">Évolution des Taux de Réussite</h2>
+        <p class="section-paragraph mx-auto" style="max-width: 700px;">
+          Résultats officiels au Baccalauréat témoignant de notre rigueur constante. Un investissement pédagogique sans faille.
+        </p>
+      </div>
+
+      <div class="timeline-container" id="timelineContainer">
+        <div class="timeline-line"></div>
+
+        <!-- Année 2021 -->
+        <div class="row timeline-item align-items-center">
+          <div class="timeline-dot"></div>
+          <div class="col-md-6 pe-md-5 text-md-end mb-4 mb-md-0">
+            <div class="timeline-card">
+              <div class="timeline-image-container">
+                <img src="Images/Eleves/1-removebg-preview.png" alt="Promotion 2021" class="timeline-image">
+              </div>
+              <div class="achievement-year">PROMOTION 2021</div>
+              <div class="achievement-rate justify-content-md-end">95<span>%</span></div>
+              <p class="text-muted mb-0">Une fondation solide confirmée par des Mentions Bien et Très Bien au plan national.</p>
+            </div>
+          </div>
+          <div class="col-md-6 ps-md-5 d-none d-md-block"></div>
+        </div>
+
+        <!-- Année 2022 -->
+        <div class="row timeline-item align-items-center">
+          <div class="timeline-dot"></div>
+          <div class="col-md-6 pe-md-5 d-none d-md-block"></div>
+          <div class="col-md-6 ps-md-5">
+            <div class="timeline-card">
+              <div class="timeline-image-container">
+                <img src="Images/TauxBac/photo-removebg-preview.png" alt="Promotion 2022" class="timeline-image">
+              </div>
+              <div class="achievement-year">PROMOTION 2022</div>
+              <div class="achievement-rate justify-content-md-start">100<span>%</span></div>
+              <p class="text-muted mb-0">Record battu avec de nouveaux lauréats intégrant les grandes écoles internationales.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Année 2023 -->
+        <div class="row timeline-item align-items-center">
+          <div class="timeline-dot"></div>
+          <div class="col-md-6 pe-md-5 text-md-end mb-4 mb-md-0">
+            <div class="timeline-card">
+              <div class="timeline-image-container">
+                <img src="Images/visiteAmbassadeur/4-removebg-preview.png" alt="Promotion 2023" class="timeline-image">
+              </div>
+              <div class="achievement-year">PROMOTION 2023</div>
+              <div class="achievement-rate justify-content-md-end">98<span>%</span></div>
+              <p class="text-muted mb-0">L'une des meilleures moyennes générales de l'académie célébrée solennellement.</p>
+            </div>
+          </div>
+          <div class="col-md-6 ps-md-5 d-none d-md-block"></div>
+        </div>
+
+        <!-- Année 2024 -->
+        <div class="row timeline-item align-items-center">
+          <div class="timeline-dot"></div>
+          <div class="col-md-6 pe-md-5 d-none d-md-block"></div>
+          <div class="col-md-6 ps-md-5">
+            <div class="timeline-card" style="box-shadow: 0 0 0 2px var(--primary-brand), 0 20px 50px rgba(0, 139, 139, 0.2);">
+              <div class="timeline-image-container">
+                <img src="Images/Concourslivre/2-removebg-preview.png" alt="Promotion 2024" class="timeline-image">
+              </div>
+              <div class="achievement-year">PROMOTION 2024</div>
+              <div class="achievement-rate justify-content-md-start text-success">98.5<span>%</span></div>
+              <p class="text-muted mb-0">L'excellence absolue. Une régularité qui conforte notre statut d'établissement leader.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE HOOK SECTION -->
+  <section class="expertise-section text-center">
+    <div class="quote-mark">“</div>
+    <div class="container fade-in-up">
+      <h3 class="expertise-phrase">
+        L'expertise du Lycée Madina ne se limite pas à transmettre le savoir. <br>
+        <span style="color: var(--primary-brand);">Elle réside dans l'art de transformer le potentiel brut en véritable réussite d'avenir.</span>
+      </h3>
+      <div class="mt-5">
+        <a href="index.html#contact" class="btn btn-dark btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg" style="transition: transform 0.3s; background: var(--primary-dark);">
+          Prenez Part à Notre Histoire
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section" role="contentinfo" aria-label="Pied de page" style="background: #052626; padding: 2rem 0; color: #fff;">
+    <div class="container text-center">
+      <a href="index.html" class="text-white text-decoration-none d-inline-flex align-items-center" style="opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">
+        <i class="bi bi-arrow-left me-2"></i> Retour vers l'Accueil
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Retour en haut de page">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Bootstrap 5.3 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Main JS (Contient initialisation header, fade-in-up, preloader) -->
+  <script src="script.js"></script>
+  
+  <!-- TIMELINE GSAP ANIMATIONS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#timelineContainer",
+          start: "top 70%",
+          end: "bottom 30%",
+        }
+      });
+
+      // 1. Tracer la ligne centrale de haut en bas
+      tl.to(".timeline-line", {
+        scaleY: 1,
+        duration: 1.5,
+        ease: "power2.inOut"
+      });
+
+      // 2. Faire apparaitre chaque point et carte de maniere alternée
+      const items = gsap.utils.toArray(".timeline-item");
+      items.forEach((item, i) => {
+        const dot = item.querySelector(".timeline-dot");
+        const card = item.querySelector(".timeline-card");
+        
+        // Determiner la direction d'arrivée (Gauche si index pair sur grand ecran)
+        const isLeft = (i % 2 === 0) && window.innerWidth > 991;
+        const xOffset = isLeft ? -100 : 100;
+        
+        const itemTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+          }
+        });
+
+        // Apparition du point
+        itemTl.to(item, { opacity: 1, duration: 0.1 })
+              .to(dot, { scale: 1, duration: 0.5, ease: "back.out(1.7)" })
+              // Apparition de la carte
+              .fromTo(card, 
+                { x: xOffset, opacity: 0, rotateY: isLeft ? 15 : -15 }, 
+                { x: 0, opacity: 1, rotateY: 0, duration: 0.8, ease: "power3.out" }, 
+                "-=0.2");
+      });
+      
+      // Animation des chiffres
+      const rates = gsap.utils.toArray(".achievement-rate");
+      rates.forEach((rate) => {
+        const targetRate = parseFloat(rate.innerText);
+        const textNode = rate.childNodes[0]; // the text node before span
+        
+        gsap.to(textNode, {
+          scrollTrigger: {
+            trigger: rate,
+            start: "top 85%"
+          },
+          onUpdate: function() {
+            // Un effet de compteur rudimentaire
+            textNode.nodeValue = (targetRate * this.progress()).toFixed(1);
+          },
+          duration: 1.5,
+          ease: "power2.out"
+        });
+      });
+      
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installations Modernes — Lycée Privé Madina</title>
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts — Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Spécificités Installations Gallery */
+    .installations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .installations-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      background: #111;
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+    }
+    
+    .installations-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease;
+      filter: brightness(0.85);
+    }
+    
+    .installations-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 139, 139, 0.2);
+    }
+    
+    .installations-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.1);
+    }
+    
+    .installations-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 3rem 1.5rem 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+      color: #fff;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .installations-item:hover .installations-caption {
+      transform: translateY(0);
+    }
+    
+    .installations-caption h5 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .cta-hook-section {
+      background: linear-gradient(135deg, #0a3d3d 0%, #008B8B 100%);
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-hook-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+      mix-blend-mode: overlay;
+    }
+    
+    /* Animation du bouton CTA */
+    .btn-pulse {
+      animation: pulse-animation 2s infinite;
+    }
+    
+    @keyframes pulse-animation {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-spinner"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-madina sticky-top" id="mainNav" role="navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html#accueil">
+        <img src="Images/logo/logo-removebg-4" alt="Logo Lycée Madina" class="navbar-brand-logo" width="55" height="55">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#accueil">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#apropos">À Propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#lycee">Lycée</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#installations">Installations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="direction.html">Direction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section section-wrapper" id="installations-hero">
+    <img src="Images/Salleinformatique/photo-removebg-preview.png" alt="Salles Numériques" class="hero-bg" width="1920" height="1080">
+    <div class="hero-overlay" style="background: linear-gradient(135deg, rgba(10, 30, 30, 0.8) 0%, rgba(0, 139, 139, 0.6) 100%);"></div>
+    <div class="hero-content text-center">
+      <h1 class="fade-in-up fw-bold">Infrastructures de Pointe</h1>
+      <p class="fade-in-up" style="transition-delay: 0.15s; max-width: 800px; margin: 0 auto 2rem auto; font-size: 1.15rem;">
+        Un campus repensé pour l'épanouissement technologique et intellectuel. Plongez au cœur d'espaces de vie et d'études conformes aux meilleurs standards internationaux.
+      </p>
+    </div>
+  </section>
+
+  <!-- INSTALLATIONS GALLERY -->
+  <section class="section-wrapper" id="installations" style="padding: 6rem 0; background-color: #f8f9fa;">
+    <div class="container">
+      <div class="text-center fade-in-up mb-5">
+        <h2 class="section-title">Immersion sur le Campus</h2>
+        <p class="section-paragraph mx-auto" style="max-width: 600px;">
+          Explorez les environnements innovants dans lesquels nos élèves bâtissent leur avenir au quotidien.
+        </p>
+      </div>
+
+      <div class="installations-grid">
+        <!-- Salle de classes -->
+        <div class="installations-item fade-in-up" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/Concourslivre/4-removebg-preview.png" alt="Salles de Classes Modernes" onload="this.style.opacity=1" style="opacity:0; transition: opacity 0.5s;">
+          <div class="installations-caption">
+            <h5>Salles de Classes Modernes</h5>
+          </div>
+        </div>
+
+        <!-- Rez de chaussee -->
+        <div class="installations-item fade-in-up" style="transition-delay: 0.1s;" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/ilyceechat/rez_de_chausse-removebg-preview.png" alt="Rez-de-Chaussée (Accueil)" onload="this.style.opacity=1" style="opacity:0; transition: opacity 0.5s;">
+          <div class="installations-caption">
+            <h5>Rez-de-Chaussée & Accueil</h5>
+          </div>
+        </div>
+
+        <!-- Le labo -->
+        <div class="installations-item fade-in-up" style="transition-delay: 0.2s;" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/labo/1-removebg-preview.png" alt="Laboratoire Scientifique">
+          <div class="installations-caption">
+            <h5>Laboratoire Scientifique</h5>
+          </div>
+        </div>
+
+        <!-- Jeu d'intelligence -->
+        <div class="installations-item fade-in-up" style="transition-delay: 0.3s;" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/Salleinformatique/intelli-removebg-preview.png" alt="Salle de Jeu d'Intelligence" onload="this.style.opacity=1" style="opacity:0; transition: opacity 0.5s;">
+          <div class="installations-caption">
+            <h5>Salle de Jeu d'Intelligence</h5>
+          </div>
+        </div>
+
+        <!-- Terrain de basket -->
+        <div class="installations-item fade-in-up" style="transition-delay: 0.4s;" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/sport/foot-removebg-preview.png" alt="Terrain de Basket (EPS)">
+          <div class="installations-caption">
+            <h5>Plateau Sportif & Basket</h5>
+          </div>
+        </div>
+
+        <!-- Bibliothèque -->
+        <div class="installations-item fade-in-up" style="transition-delay: 0.5s;" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/Refectoire/refec1-removebg-preview.png" alt="Bibliothèque Numérique / Espace Lecture">
+          <div class="installations-caption">
+            <h5>Réfectoire</h5>
+          </div>
+        </div>
+
+        <!-- Salle des profs -->
+        <div class="installations-item fade-in-up" style="transition-delay: 0.6s;" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+          <img src="Images/Reunionprof/1-removebg-preview.png" alt="Salle des Professeurs">
+          <div class="installations-caption">
+            <h5>Salle des Professeurs</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION (HOOK) -->
+  <section class="cta-hook-section text-center text-white">
+    <img src="Images/arrierepage/lpm-removebg-preview.png" alt="Fond Lycée" class="cta-hook-bg">
+    <div class="container fade-in-up" style="position: relative; z-index: 2;">
+      <h2 class="display-5 fw-bold mb-4 text-white" style="letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        L'avenir de votre enfant n'attend pas.
+      </h2>
+      <p class="lead mb-5 mx-auto" style="max-width: 800px; font-weight: 300; opacity: 0.95; line-height: 1.8; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+        Au <strong>Lycée Madina</strong>, nous offrons bien plus qu'une éducation classique : c'est un tremplin vers la réussite au sein d'infrastructures de haut standing. Les places pour la rentrée prochaine sont strictement limitées pour garantir la qualité de l'apprentissage. <br><br><b>Sécurisez son avenir dès aujourd'hui.</b>
+      </p>
+      
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-4">
+        <a href="index.html#contact" class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg btn-pulse" style="color: var(--primary-dark);">
+          Inscrire Mon Enfant Maintenant
+        </a>
+        <a href="tel:+22379228452" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-bold d-inline-flex align-items-center" style="border-width: 2px;">
+          <i class="bi bi-telephone-outbound me-2"></i> Prendre Renseignements
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="modal fade lightbox-modal" id="lightboxModal" tabindex="-1" aria-label="Image agrandie" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        <div class="modal-body">
+          <img src="" alt="Image en grand format" id="lightboxImage" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-section" role="contentinfo" aria-label="Pied de page" style="background: #052626; padding: 2rem 0; color: #fff; border-top: 2px solid rgba(0,139,139,0.3);">
+    <div class="container text-center">
+      <a href="index.html" class="text-white text-decoration-none d-inline-flex align-items-center" style="opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">
+        <i class="bi bi-arrow-left me-2"></i> Retour vers l'Accueil
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Retour en haut de page">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Bootstrap 5.3 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Main JS -->
+  <script src="script.js"></script>
+  
+  <!-- Lightbox Logic Injection -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.installations-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          const lbImg = document.getElementById('lightboxImage');
+          if(img && lbImg) lbImg.src = img.src;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

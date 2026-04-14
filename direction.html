@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direction & Excellence Académique — Lycée Madina</title>
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts — Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR (Copied from index.html for smooth navigation)
+       ============================================================ -->
+  <nav class="navbar navbar-expand-lg navbar-madina sticky-top" id="mainNav" role="navigation" aria-label="Navigation principale">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html#accueil">
+        <img src="Images/logo/logo-removebg-4" alt="Logo Lycée Madina Bamako Mali" class="navbar-brand-logo" width="55" height="55">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#accueil" id="nav-accueil">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#apropos" id="nav-apropos">À Propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#lycee" id="nav-lycee">Lycée</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#programmes" id="nav-programmes">Programmes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#direction" id="nav-direction">Direction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#contact" id="nav-contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION INSTITUTIONNELLE
+       ============================================================ -->
+  <section class="hero-section section-wrapper" id="direction-hero" aria-label="L'Excellence au Sommet">
+    <img src="Images/arrierepage/lpm-removebg-preview.png" alt="Vue Bureau de Direction / Institution" class="hero-bg" width="1920" height="1080">
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-center">
+      <h1 class="fade-in-up">L'Excellence au Sommet</h1>
+      <p class="fade-in-up" style="transition-delay: 0.15s; max-width: 800px; margin: 0 auto 2rem auto;">
+        Une vision pédagogique engagée pour forger les décideurs de demain. Rigueur intellectuelle, encadrement de proximité et épanouissement personnel au cœur de notre institution.
+      </p>
+      <div class="fade-in-up" style="transition-delay: 0.3s;">
+        <a href="#programmes" class="btn-hero shadow-lg">
+          Découvrir les Programmes <i class="bi bi-arrow-down ms-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CURRICULUM & SÉRIES (Le Cœur Académique)
+       ============================================================ -->
+  <section class="section-wrapper" id="programmes" style="padding: 6rem 0; background-color: #f8f9fa;">
+    <div class="container">
+      <div class="text-center fade-in-up mb-5">
+        <h2 class="section-title" style="color: var(--primary-dark);">Notre Cœur Académique</h2>
+        <p class="section-paragraph mx-auto" style="color: var(--text-secondary); max-width: 600px;">
+          Des filières d'excellence conçues pour révéler le plein potentiel de chaque étudiant, de la 10ème année à la Terminale.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- 10ème Commune Générale -->
+        <div class="col-lg-3 col-md-6">
+          <div class="tech-card fade-in-up h-100 position-relative bg-white">
+            <div class="card-icon">
+              <i class="bi bi-journal-text text-white"></i>
+            </div>
+            <h4 class="fw-bold mb-3" style="color: var(--text-main);">10ème Commune Générale</h4>
+            <span class="badge bg-info text-dark mb-3 px-3 py-2 rounded-pill">Tronc Commun</span>
+            <p>Une année charnière pour consolider les fondamentaux et préparer sereinement l'orientation vers les séries scientifiques.</p>
+          </div>
+        </div>
+
+        <!-- 11ème Sciences -->
+        <div class="col-lg-3 col-md-6">
+          <div class="tech-card h-100 position-relative bg-white">
+            <div class="card-icon" style="background-color: #008B8B; display: flex !important; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.5rem;">
+              <i class="bi bi-book"></i> X
+            </div>
+            <h4 class="fw-bold mb-3" style="color: var(--text-main);">11ème Sciences</h4>
+            <span class="badge bg-info text-dark mb-3 px-3 py-2 rounded-pill">Pré-Spécialisation</span>
+            <p>Approfondissement des matières scientifiques pour préparer l'entrée dans les classes de terminale TSE et TSExp.</p>
+          </div>
+        </div>
+
+        <!-- TSE -->
+        <div class="col-lg-3 col-md-6">
+          <div class="tech-card h-100 position-relative bg-white">
+            <div class="card-icon" style="background-color: var(--primary-brand); display: flex !important;">
+              <i class="bi bi-cpu text-white"></i>
+            </div>
+            <h4 class="fw-bold mb-3" style="color: var(--text-main);">TSE (Terminale Sciences Exacte)</h4>
+            <span class="badge bg-info text-dark mb-3 px-3 py-2 rounded-pill">Sciences Exactes</span>
+            <p>Un parcours analytique intense orienté mathématiques et physique-chimie, forgeant l'esprit pour les grandes écoles d'ingénierie.</p>
+          </div>
+        </div>
+
+        <!-- TSExp -->
+        <div class="col-lg-3 col-md-6">
+          <div class="tech-card h-100 position-relative bg-white">
+            <div class="card-icon" style="background-color: var(--primary-brand); display: flex !important;">
+              <i class="bi bi-droplet-half text-white"></i>
+            </div>
+            <h4 class="fw-bold mb-3" style="color: var(--text-main);">TSExp (Terminale Sciences Experimentales)</h4>
+            <span class="badge bg-info text-dark mb-3 px-3 py-2 rounded-pill">Sciences Expérimentales</span>
+            <p>Une démarche axée sur l'observation, la biologie et les manipulations pratiques. La voie d'excellence vers les carrières médicales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LE TABLEAU D'HONNEUR (Social Proof)
+       ============================================================ -->
+  <section class="section-wrapper" id="honneur" style="padding: 6rem 0; background-color: #ffffff;">
+    <div class="container">
+      <div class="text-center fade-in-up mb-5">
+        <h2 class="section-title" style="color: var(--primary-dark);">Tableau d'Honneur</h2>
+        <p class="section-paragraph mx-auto" style="color: var(--text-secondary); max-width: 600px;">
+          Célébration de nos élèves les plus méritants, vitrines de la réussite du Lycée Madina.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Étudiant 1 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="honor-card fade-in-up text-center">
+            <div class="honor-img-wrapper mx-auto mb-4">
+              <img src="" alt="Meilleur élève" class="rounded-circle honor-img object-fit-cover">
+              <div class="medal-icon text-warning"><i class="bi bi-award-fill"></i></div>
+            </div>
+            <h5 class="fw-bold mb-1" style="color: var(--text-main);">[NOM ETUDIANT 1]</h5>
+            <p class="text-muted mb-3" style="font-size: 0.9rem;">Classe: Terminale TSE</p>
+            <div class="honor-score mx-auto">18.75 / 20</div>
+          </div>
+        </div>
+
+        <!-- Étudiant 2 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="honor-card fade-in-up text-center" style="transition-delay: 0.15s;">
+            <div class="honor-img-wrapper mx-auto mb-4">
+              <img src="" alt="Meilleur élève" class="rounded-circle honor-img object-fit-cover">
+            </div>
+            <h5 class="fw-bold mb-1" style="color: var(--text-main);">[NOM ETUDIANT 2]</h5>
+            <p class="text-muted mb-3" style="font-size: 0.9rem;">Classe: 11ème TSExp</p>
+            <div class="honor-score mx-auto">17.90 / 20</div>
+          </div>
+        </div>
+
+        <!-- Étudiant 3 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="honor-card fade-in-up text-center" style="transition-delay: 0.3s;">
+            <div class="honor-img-wrapper mx-auto mb-4">
+              <img src="" alt="Meilleur élève" class="rounded-circle honor-img object-fit-cover">
+            </div>
+            <h5 class="fw-bold mb-1" style="color: var(--text-main);">[NOM ETUDIANT 3]</h5>
+            <p class="text-muted mb-3" style="font-size: 0.9rem;">Classe: 10ème Tronc Commun</p>
+            <div class="honor-score mx-auto">17.40 / 20</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONSEIL DE DIRECTION (Leadership)
+       ============================================================ -->
+  <section class="section-wrapper" id="direction" style="padding: 6rem 0; background-color: var(--surface-light);">
+    <div class="container">
+      <div class="text-center fade-in-up mb-5">
+        <h2 class="section-title">Conseil de Direction</h2>
+        <p class="section-paragraph mx-auto" style="max-width: 600px;">
+          Un exécutif dévoué à maintenir l'ordre, l'excellence académique et la vision stratégique.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Coordinateur -->
+        <div class="col-lg-4 col-md-6">
+          <div class="director-card fade-in-up position-relative overflow-hidden rounded-4">
+            <img src="" alt="Le Coordinateur" class="director-img w-100 object-fit-cover">
+            <div class="director-info position-absolute bottom-0 start-0 w-100 p-4 text-center">
+              <span class="badge bg-primary px-3 py-2 rounded-pill shadow-sm mb-2">Le Coordinateur</span>
+              <h5 class="mb-0 fw-bold text-white">[NOM DU COORDINATEUR]</h5>
+            </div>
+          </div>
+        </div>
+        <!-- Directeur des Études -->
+        <div class="col-lg-4 col-md-6">
+          <div class="director-card fade-in-up position-relative overflow-hidden rounded-4" style="transition-delay: 0.15s;">
+            <img src="" alt="Le Directeur des Études" class="director-img w-100 object-fit-cover">
+            <div class="director-info position-absolute bottom-0 start-0 w-100 p-4 text-center">
+              <span class="badge text-dark px-3 py-2 rounded-pill shadow-sm mb-2" style="background-color: var(--primary-brand);">Le Directeur des Études</span>
+              <h5 class="mb-0 fw-bold text-white">[NOM DU DIRECTEUR]</h5>
+            </div>
+          </div>
+        </div>
+        <!-- Surveillant Général -->
+        <div class="col-lg-4 col-md-6">
+          <div class="director-card fade-in-up position-relative overflow-hidden rounded-4" style="transition-delay: 0.3s;">
+            <img src="" alt="Le Surveillant Général" class="director-img w-100 object-fit-cover">
+            <div class="director-info position-absolute bottom-0 start-0 w-100 p-4 text-center">
+              <span class="badge bg-warning text-dark px-3 py-2 rounded-pill shadow-sm mb-2">Le Surveillant Général</span>
+              <h5 class="mb-0 fw-bold text-white">[NOM DU SURVEILLANT]</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER & CONTACT DIRECT (CTA)
+       ============================================================ -->
+  <footer class="footer-cta-section text-center text-white" style="background: linear-gradient(135deg, #0a3d3d 0%, #008B8B 100%); padding: 5rem 0;">
+    <div class="container fade-in-up">
+      <h2 class="fw-bold mb-4" style="font-size: 2.2rem;">Rejoignez l'Excellence</h2>
+      <p class="mb-5 mx-auto" style="max-width: 600px; font-size: 1.1rem; color: rgba(255,255,255,0.85);">
+        Intégrez la dynamique de succès du Lycée Madina. Notre administration est à votre écoute pour toute procédure d'inscription.
+      </p>
+      <div class="d-flex justify-content-center flex-column flex-sm-row gap-3">
+        <a href="tel:+22379228452" class="btn btn-light btn-lg rounded-pill px-4 py-3 fw-bold d-inline-flex justify-content-center align-items-center shadow hover-scale-btn">
+          <i class="bi bi-telephone-fill me-2" style="color: var(--primary-dark);"></i> Appeler l'Administration
+        </a>
+        <a href="https://wa.me/22379228452" target="_blank" class="btn btn-lg rounded-pill px-4 py-3 fw-bold d-inline-flex justify-content-center align-items-center shadow hover-scale-btn text-white" style="background-color: #25D366; border: none;">
+          <i class="bi bi-whatsapp me-2"></i> Contact WhatsApp Direct
+        </a>
+      </div>
+    </div>
+    
+    <div class="container mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.2);">
+      <a href="index.html" class="text-white text-decoration-none d-inline-flex align-items-center hover-scale-btn">
+        <i class="bi bi-arrow-left me-2"></i> Retour vers l'Accueil
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Retour en haut de page">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Bootstrap 5.3 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Main JS (Contient déja l'initialisation de .fade-in-up, preloader, etc.) -->
+  <script src="script.js"></script>
+</body>
+</html>
