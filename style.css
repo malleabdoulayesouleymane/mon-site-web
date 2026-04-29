@@ -1707,12 +1707,10 @@ body.direction-page {
 
 .director-img {
   height: 100%;
-  filter: grayscale(100%);
-  transition: filter 0.6s ease, transform 0.6s ease;
+  transition: transform 0.6s ease;
 }
 
 .director-card:hover .director-img {
-  filter: grayscale(0%);
   transform: scale(1.05); /* Zoom léger */
 }
 
