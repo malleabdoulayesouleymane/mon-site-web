@@ -255,6 +255,9 @@ body {
 /* --- À Propos / Stats Section --- */
 .stats-section {
   padding: 5rem 0;
+  background: rgba(245, 248, 248, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .stat-card {
@@ -1358,7 +1361,7 @@ body {
 }
 
 .internat-masonry-item:hover .gallery-item-overlay {
-  background: rgba(0, 139, 139, 0.35);
+  background: rgba(0, 139, 139, 0.0);
 }
 
 .internat-masonry-item .gallery-item-overlay i {
