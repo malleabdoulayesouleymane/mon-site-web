@@ -470,6 +470,8 @@ window.addEventListener('load', () => {
   if (!newsScroller) return;
 
   const newsCards = newsScroller.querySelectorAll('.news-card');
+  const prevBtn = document.getElementById('newsPrevBtn');
+  const nextBtn = document.getElementById('newsNextBtn');
   
   // S'assurer que les cartes sont visibles immédiatement
   gsap.set(newsCards, { opacity: 1, x: 0 });
@@ -489,6 +491,15 @@ window.addEventListener('load', () => {
 
   // LOGIQUE AUTO-SCROLL UN À UN
   let isScrolling = false;
+
+  function getScrollAmount() {
+    const cards = newsScroller.querySelectorAll('.news-card');
+    if (cards.length < 2) return 0;
+    const cardWidth = cards[0].offsetWidth;
+    const gap = parseFloat(window.getComputedStyle(newsScroller).gap) || 0;
+    return cardWidth + gap;
+  }
+
   function scrollNext() {
     if (isScrolling) return;
     isScrolling = true;
@@ -497,9 +508,7 @@ window.addEventListener('load', () => {
     if (cards.length < 2) return;
 
     const firstCard = cards[0];
-    const cardWidth = firstCard.offsetWidth;
-    const gap = parseFloat(window.getComputedStyle(newsScroller).gap) || 0;
-    const moveAmount = cardWidth + gap;
+    const moveAmount = getScrollAmount();
 
     // Animation de défilement vers la gauche (l'élément suivant arrive)
     gsap.to(newsScroller, {
@@ -514,10 +523,121 @@ window.addEventListener('load', () => {
     });
   }
 
+  function scrollPrev() {
+    if (isScrolling) return;
+    isScrolling = true;
+
+    const cards = newsScroller.querySelectorAll('.news-card');
+    if (cards.length < 2) return;
+
+    const lastCard = cards[cards.length - 1];
+    const moveAmount = getScrollAmount();
+
+    // Déplacer la dernière carte au début
+    newsScroller.prepend(lastCard);
+    newsScroller.scrollLeft += moveAmount; // Compenser visuellement
+
+    // Animation de défilement vers la droite
+    gsap.to(newsScroller, {
+      scrollLeft: newsScroller.scrollLeft - moveAmount,
+      duration: 1,
+      ease: "power2.inOut",
+      onComplete: () => {
+        isScrolling = false;
+      }
+    });
+  }
+
   // Lancement de l'intervalle de 2 secondes
   let newsInterval = setInterval(scrollNext, 2000);
 
+  // Fonction pour réinitialiser le timer auto-scroll
+  function resetAutoScroll() {
+    clearInterval(newsInterval);
+    newsInterval = setInterval(scrollNext, 2000);
+  }
+
   // Pause au survol pour la lecture
   newsScroller.addEventListener('mouseenter', () => clearInterval(newsInterval));
-  newsScroller.addEventListener('mouseleave', () => newsInterval = setInterval(scrollNext, 2000));
+  newsScroller.addEventListener('mouseleave', () => resetAutoScroll());
+
+  // --- BOUTONS FLECHES ---
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      clearInterval(newsInterval);
+      scrollPrev();
+      // Reprendre l'auto-scroll après 3s d'inactivité
+      setTimeout(resetAutoScroll, 3000);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      clearInterval(newsInterval);
+      scrollNext();
+      setTimeout(resetAutoScroll, 3000);
+    });
+  }
+
+  // --- SWIPE TACTILE (Touch + Drag souris) ---
+  let startX = 0;
+  let isDragging = false;
+  let dragThreshold = 50; // px minimum pour déclencher un swipe
+
+  // Touch events (mobile)
+  newsScroller.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    clearInterval(newsInterval);
+  }, { passive: true });
+
+  newsScroller.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > dragThreshold) {
+      if (diff > 0) {
+        scrollNext(); // Swipe vers la gauche → article suivant
+      } else {
+        scrollPrev(); // Swipe vers la droite → article précédent
+      }
+    }
+    setTimeout(resetAutoScroll, 3000);
+  }, { passive: true });
+
+  // Mouse drag events (desktop)
+  newsScroller.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    newsScroller.style.cursor = 'grabbing';
+    clearInterval(newsInterval);
+    e.preventDefault();
+  });
+
+  newsScroller.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+  });
+
+  newsScroller.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    newsScroller.style.cursor = '';
+
+    const diff = startX - e.clientX;
+    if (Math.abs(diff) > dragThreshold) {
+      if (diff > 0) {
+        scrollNext();
+      } else {
+        scrollPrev();
+      }
+    }
+    setTimeout(resetAutoScroll, 3000);
+  });
+
+  newsScroller.addEventListener('mouseleave', () => {
+    if (isDragging) {
+      isDragging = false;
+      newsScroller.style.cursor = '';
+    }
+  });
 })();
