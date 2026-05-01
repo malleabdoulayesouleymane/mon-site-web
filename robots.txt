@@ -1,0 +1,8 @@
+# Lycée Privé Madina — Bamako, Mali
+# https://lyceemadina.netlify.app
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lyceemadina.netlify.app/sitemap.xml
